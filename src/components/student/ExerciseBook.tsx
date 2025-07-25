@@ -187,17 +187,11 @@ export function ExerciseBook() {
     if (tool.type === 'pen') {
       ctx.globalCompositeOperation = 'source-over'
       ctx.strokeStyle = tool.color
-      ctx.fillStyle = tool.color
     } else {
       ctx.globalCompositeOperation = 'destination-out'
     }
 
-    // Start a new path and draw a dot for single clicks
-    ctx.beginPath()
-    ctx.arc(pos.x, pos.y, tool.size / 2, 0, Math.PI * 2)
-    ctx.fill()
-    
-    // Begin path for continuous drawing
+    // Start a new path for continuous drawing
     ctx.beginPath()
     ctx.moveTo(pos.x, pos.y)
   }
@@ -213,25 +207,9 @@ export function ExerciseBook() {
 
     const currentPos = getMousePos(e)
 
-    // Set up drawing style
-    ctx.lineWidth = tool.size
-    ctx.lineCap = 'round'
-    ctx.lineJoin = 'round'
-
-    if (tool.type === 'pen') {
-      ctx.globalCompositeOperation = 'source-over'
-      ctx.strokeStyle = tool.color
-    } else {
-      ctx.globalCompositeOperation = 'destination-out'
-    }
-
-    // Draw continuous line to current position
+    // Continue the path to current position (this creates smooth continuous lines)
     ctx.lineTo(currentPos.x, currentPos.y)
     ctx.stroke()
-    
-    // Move the path to current position for next segment
-    ctx.beginPath()
-    ctx.moveTo(currentPos.x, currentPos.y)
 
     // Update last point
     setLastPoint(currentPos)

@@ -4,6 +4,7 @@ import { Header } from '@/components/layout/Header'
 import { Sidebar } from '@/components/layout/Sidebar'
 import { DigitalTextbooks } from '@/components/student/DigitalTextbooks'
 import { ExerciseBook } from '@/components/student/ExerciseBook'
+import { Dashboard } from '@/components/student/Dashboard'
 import type { UserRole } from '@/types/user'
 
 function App() {
@@ -16,7 +17,7 @@ function App() {
     // Set default page based on role
     switch (role) {
       case 'student':
-        setCurrentPage('textbooks')
+        setCurrentPage('dashboard')
         break
       case 'teacher':
         setCurrentPage('classes')
@@ -35,7 +36,7 @@ function App() {
 
   const handleRoleChange = () => {
     setUserRole(null)
-    setCurrentPage('textbooks')
+    setCurrentPage('dashboard')
     setSidebarOpen(false)
   }
 
@@ -50,6 +51,8 @@ function App() {
     // Student pages
     if (userRole === 'student') {
       switch (currentPage) {
+        case 'dashboard':
+          return <Dashboard />
         case 'textbooks':
           return <DigitalTextbooks />
         case 'exercise':
@@ -61,7 +64,7 @@ function App() {
         case 'analytics':
           return <div className="p-8 text-center"><h2 className="text-2xl font-bold">My Progress</h2><p className="text-gray-600 mt-2">Performance analytics coming soon...</p></div>
         default:
-          return <DigitalTextbooks />
+          return <Dashboard />
       }
     }
 
@@ -112,7 +115,7 @@ function App() {
           onRoleChange={handleRoleChange}
         />
         
-        <main className="flex-1 pr-2 lg:pr-4 py-2 lg:py-4">
+        <main className="flex-1 p-4">
           {renderContent()}
         </main>
       </div>

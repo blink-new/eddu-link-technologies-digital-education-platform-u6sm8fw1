@@ -17,7 +17,8 @@ import {
   MapPin,
   Heart,
   DollarSign,
-  MessageSquare
+  MessageSquare,
+  Home
 } from 'lucide-react'
 import type { UserRole } from '@/types/user'
 
@@ -30,6 +31,7 @@ interface SidebarProps {
 
 const menuItems = {
   student: [
+    { id: 'dashboard', label: 'Dashboard', icon: Home },
     { id: 'textbooks', label: 'Digital Textbooks', icon: BookOpen },
     { id: 'exercise', label: 'Exercise Book', icon: PenTool },
     { id: 'assignments', label: 'Assignments', icon: ClipboardList },
